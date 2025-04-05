@@ -32,7 +32,7 @@ ingress {
   from_port   = 3000
   to_port     = 3000
   protocol    = "tcp"
-  security_groups = var.aws_security_group.alb_sg.id
+    security_groups = [aws_security_group.alb_sg.id] # allow traffic from alb security group
 }
 egress {
     from_port = 0

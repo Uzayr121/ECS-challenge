@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"ALB","Source":"./Modules/ALB","Dir":"Modules/ALB"},{"Key":"ecs","Source":"./Modules/ECS","Dir":"Modules/ECS"},{"Key":"security-group","Source":"./Modules/Security-Group","Dir":"Modules/Security-Group"},{"Key":"vpc","Source":"./Modules/VPC","Dir":"Modules/VPC"}]}
