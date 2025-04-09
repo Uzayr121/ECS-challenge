@@ -1,0 +1,63 @@
+name: Terraform plan and apply
+on: 
+
+    workflow_dispatch:
+        inputs:
+            confirmation:
+                description: type 'apply' to build
+                required: true
+                default: 'no'
+
+
+jobs:
+    build:
+
+        name: building infrastructure
+        runs-on: ubuntu-latest
+        steps: 
+            - name: checkout code
+              uses: actions/checkout@v2
+              
+            - name: Abort if Not Confirmed
+              if: ${{ github.event.inputs.confirmation != 'apply' }}  # Runs for any input other than 'apply'
+              run: |
+                echo "Workflow is aborted because you did not say 'apply'."
+                exit 1 # Exit with a non-zero status to fail the job
+                
+
+
+            - name: set up terraform
+              uses: hashicorp/setup-terraform@v1
+              with:
+                terraform_version: v1.11.1
+
+            - name: configure AWS credentials
+              uses: aws-actions/configure-aws-credentials@v1
+              with:
+                aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                aws-region: ${{ secrets.AWS_REGION }}
+
+
+            - name: terraform init
+              working-directory: ./Terraform # Specify the directory where your Terraform files are located
+              run: terraform init
+
+            - name: terraform format
+              working-directory: ./Terraform # Specify the directory where your Terraform files are located
+              run: terraform fmt
+
+            - name: terraform validate
+              working-directory: ./Terraform # Specify the directory where your Terraform files are located
+              run: terraform validate
+
+            - name: terraform plan
+              working-directory: ./Terraform # Specify the directory where your Terraform files are located
+              run: terraform plan
+
+            - name: terraform apply # This step will only run if the confirmation input is 'apply'
+              working-directory: ./Terraform # Specify the directory where your Terraform files are located
+              run: terraform apply -auto-approve # Automatically approve the apply step
+
+
+

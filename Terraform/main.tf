@@ -25,7 +25,7 @@ module "ecs" {
   iam_role_name        = "ecs-iam-role"
   secuity_group_ecs_id = module.security-group.security_group_ecs_id
   target_group_arn     = module.ALB.target_group_arn
-  image_id             = "050451387626.dkr.ecr.eu-west-1.amazonaws.com/ecs-image:latest"
+  image_id             = "050451387626.dkr.ecr.eu-west-1.amazonaws.com/ecs:latest"
 }
 
 module "ALB" {
