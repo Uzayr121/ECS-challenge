@@ -60,7 +60,7 @@ jobs:
             - name: terraform lint
               working-directory: ./Terraform # Specify the directory where your Terraform files are located
               run: |
-                tflint --inint && tflint
+                tflint --init && tflint
 
             - name: terraform plan
               working-directory: ./Terraform # Specify the directory where your Terraform files are located
