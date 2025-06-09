@@ -38,12 +38,12 @@ variable "secuity_group_ecs_id" {
     type = string
   
 }
-variable "public_subnet_id_1" {
+variable "private_subnet_id_1" {
     description = "Public subnet 1 id"
     type = string
   
 }
-variable "public_subnet_id_2" {
+variable "private_subnet_id_2" {
     description = "Public subnet 2 id"
     type = string
   

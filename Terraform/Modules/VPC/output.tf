@@ -13,3 +13,14 @@ output "public_subnet_id_2" {
   # id of the public subnet 2" {
   
 }
+
+output "private_subnet_id_1" {
+  value = aws_subnet.private_1.id
+  # id of the private subnet 1" {
+  
+}
+output "private_subnet_id_2" {
+  value = aws_subnet.private_2.id
+  # id of the private subnet 2" {
+  
+}
