@@ -28,9 +28,9 @@ jobs:
                 aws-region: ${{ secrets.AWS_REGION }}
 
             - name: Terraform Init
-              working-directory: ./terraform
+              working-directory: ./Terraform
               run: terraform init
 
             - name: Terraform Apply
-              working-directory: ./terraform
+              working-directory: ./Terraform
               run: terraform apply -auto-approve

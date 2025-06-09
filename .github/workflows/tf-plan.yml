@@ -9,23 +9,23 @@ on:
         default: 'no'
 
 jobs:
- # Lint:
-  #  name: Tflint 
-   # runs-on: ubuntu-latest
-    #steps:
-#      - name: Checkout code
- #       uses: actions/checkout@v2
+  Lint:
+    name: Tflint 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-#      - name: Abort if Not Confirmed
-  #      if: ${{ github.event.inputs.confirmation != 'plan' }}
- #       run: |
- #         echo "Workflow is aborted because you did not say 'plan'."
-#          exit 1
+      - name: Abort if Not Confirmed
+        if: ${{ github.event.inputs.confirmation != 'plan' }}
+        run: |
+          echo "Workflow is aborted because you did not say 'plan'."
+          exit 1
 
-   #   - name: Set up Terraform
-  #      uses: hashicorp/setup-terraform@v2
- #       with:
-#          terraform_version: 1.11.1
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.11.1
 
 #      - name: Install Tflint
  #       run: |
@@ -33,7 +33,7 @@ jobs:
    #       echo "Tflint installed successfully"
 
 #      - name: Run Tflint
-  #      working-directory: ./terraform
+  #      working-directory: ./Terraform
  #       run: tflint --recursive
 
 #  Checkov:
@@ -49,7 +49,7 @@ jobs:
 #          echo "Checkov installed successfully"
 
  #     - name: Run Checkov
-  #      working-directory: ./terraform
+  #      working-directory: ./Terraform
    #     run: |
     #      checkov -d . --quiet
      #     echo "Checkov scan completed successfully"
@@ -67,7 +67,7 @@ jobs:
    #       echo "Tfsec installed successfully"
 #
  #     - name: Run Tfsec
-  #      working-directory: ./terraform
+  #      working-directory: ./Terraform
    #     run: tfsec --severity HIGH --soft-fail=false
 
   TerraformPlan:
@@ -90,18 +90,18 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Terraform Init
-        working-directory: ./terraform
+        working-directory: ./Terraform
         run: terraform init
 
       - name: Terraform fmt
-        working-directory: ./terraform
+        working-directory: ./Terraform
         run: terraform fmt
 
       - name: Terraform Validate
-        working-directory: ./terraform
+        working-directory: ./Terraform
         run: terraform validate
 
       - name: Terraform Plan
-        working-directory: ./terraform
+        working-directory: ./Terraform
         run: terraform plan
  
