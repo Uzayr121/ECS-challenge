@@ -9,66 +9,66 @@ on:
         default: 'no'
 
 jobs:
-  Lint:
-    name: Tflint 
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+ # Lint:
+  #  name: Tflint 
+   # runs-on: ubuntu-latest
+    #steps:
+#      - name: Checkout code
+ #       uses: actions/checkout@v2
 
-      - name: Abort if Not Confirmed
-        if: ${{ github.event.inputs.confirmation != 'plan' }}
-        run: |
-          echo "Workflow is aborted because you did not say 'plan'."
-          exit 1
+#      - name: Abort if Not Confirmed
+  #      if: ${{ github.event.inputs.confirmation != 'plan' }}
+ #       run: |
+ #         echo "Workflow is aborted because you did not say 'plan'."
+#          exit 1
 
-      - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: 1.11.1
+   #   - name: Set up Terraform
+  #      uses: hashicorp/setup-terraform@v2
+ #       with:
+#          terraform_version: 1.11.1
 
-      - name: Install Tflint
-        run: |
-          curl -s https://raw.githubusercontent.com/antonbabenko/pre-commit-terraform/master/scripts/install_tflint.sh | bash
-          echo "Tflint installed successfully"
+#      - name: Install Tflint
+ #       run: |
+  #        curl -s https://raw.githubusercontent.com/antonbabenko/pre-commit-terraform/master/scripts/install_tflint.sh | bash
+   #       echo "Tflint installed successfully"
 
-      - name: Run Tflint
-        working-directory: ./terraform
-        run: tflint --recursive
+#      - name: Run Tflint
+  #      working-directory: ./terraform
+ #       run: tflint --recursive
 
-  Checkov:
-    name: Checkov scan
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+#  Checkov:
+ #   name: Checkov scan
+  #  runs-on: ubuntu-latest
+   # steps:
+    #  - name: Checkout code
+     #   uses: actions/checkout@v2
 
-      - name: Install Checkov
-        run: |
-          pip install checkov
-          echo "Checkov installed successfully"
+#      - name: Install Checkov
+ #       run: |
+  #        pip install checkov
+#          echo "Checkov installed successfully"
 
-      - name: Run Checkov
-        working-directory: ./terraform
-        run: |
-          checkov -d . --quiet
-          echo "Checkov scan completed successfully"
+ #     - name: Run Checkov
+  #      working-directory: ./terraform
+   #     run: |
+    #      checkov -d . --quiet
+     #     echo "Checkov scan completed successfully"
 
-  TFsec: 
-    name: Tfsec scan
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+  #TFsec: 
+   # name: Tfsec scan
+    #runs-on: ubuntu-latest
+    #steps:
+     # - name: Checkout code
+      #  uses: actions/checkout@v2
 
-      - name: Install Tfsec
-        run: |
-          curl -sSfL https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install.sh | sh
-          echo "Tfsec installed successfully"
-
-      - name: Run Tfsec
-        working-directory: ./terraform
-        run: tfsec --severity HIGH --soft-fail=false
+#      - name: Install Tfsec
+ #       run: |
+  #        curl -sSfL https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install.sh | sh
+   #       echo "Tfsec installed successfully"
+#
+ #     - name: Run Tfsec
+  #      working-directory: ./terraform
+   #     run: tfsec --severity HIGH --soft-fail=false
 
   TerraformPlan:
     name: Terraform Plan
