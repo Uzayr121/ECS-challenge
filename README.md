@@ -1,24 +1,32 @@
-<div align="center">
-    <img src="./images/coderco.jpg" alt="CoderCo" width="300"/>
-</div>
+## Overview 📝
 
-# CoderCo Assignment 1 - Open Source App Hosted on ECS with Terraform 🚀
+- this project automates deployment of the threat modelling composer onto **AWS**, using tools such as **Docker**, **Terraform**, **CICD pipeline** for end to end automation, and the services within **AWS**. This project began with deploying manually using the **AWS management console** using the **ECS** service to run our containers, then deploying it using **Terrafrom** for automation of infrastructure, to finally having used **CICD** to automate the whole process of the deployment from building the **docker image** to deploying the infrastructure
 
-This project is based on Amazon's Threat Composer Tool, an open source tool designed to facilitate threat modeling and improve security assessments. You can explore the tool's dashboard here: [Threat Composer Tool](https://awslabs.github.io/threat-composer/workspaces/default/dashboard)
 
-## Task/Assignment 📝
+## Architectural diagram
 
-- Create your own repository and complete the task there. You may create a `app` in your repo and copy all the files in this directory into it. Or alternatively, you can use this directory as is. Your choice.
 
-- Your task will be to create a container image for the app, push it to ECR (recommended) or DockerHub. Ideally, you should use a CI/CD pipeline to build, test, and push the container image.
+![architectural diagram](/images/architecture.gif)
 
-- Deploy the app on ECS using Terraform. All the resources should be provisioned using Terraform. Use TF modules.
+## Key Components
 
-- Make sure the app is live on `https://tm.<your-domain>` or `https://tm.labs.<your-domain>`
+- **Docker**: We use Docker to containerise our app for faster deployments and consistency across environments
 
-- App must use HTTPS. Hosted on ECS. Figure out the rest. Once app is live, add screenshots to the README.md file.
+- **AWS** :
+- ``ECS`` : we use fargte to run our containers without having to manage them
+- ``VPC`` : we define our network where we will host our containers and other services
+- ``ALB`` : we use an application load balancer to sit in front of our containers and route traffic to them
+- ``Security Groups`` : we define how our resources can be accessed and what traffic is allowed in and out
+- ``ECR`` : we use this to store our docker images
+- ``ACM`` : used for secure HTTPS connections and enforce HTTPS redirection
 
-- Add architecture diagram of how the infrastructure is setup. (Use Lucidchart or draw.io or mermaid) You are free to use any diagramming tool.
+- **Terraform** : Infrastrucutre as code(IaC) allows us to create our resources much quicker. Modules have been used for reusability and greater flexibility
+
+- **Github actions**
+- ``build and push``: pipeline used to build our docker image, tag it and push to our ECR repository
+- ``terraform plan`` : pipeline used to initialise our terraform and compare current state and desired state to show what will be added, changed and delete
+- ``terraform apply`` : pipeline used to execute the terraform plan and only runs if the plan pipeline is successful
+- ``terraform destroy`` : pipeline used to destroy our infrastructure 
 
 ## Local app setup 💻
 
@@ -42,8 +50,3 @@ serve -s build
 - [Terraform AWS ECS](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_cluster)
 - [Terraform Docs](https://www.terraform.io/docs/index.html)
 - [ECS Docs](https://docs.aws.amazon.com/ecs/latest/userguide/what-is-ecs.html)
-
-## Advice & Tips �
-
-- This is just a simple app, you may use another app if you'd like. 
-- Use best practices for your Terraform code. Use best practices for your container image. Use best practices for your CI/CD pipeline.

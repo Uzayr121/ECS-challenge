@@ -27,48 +27,48 @@ jobs:
         with:
           terraform_version: 1.11.1
 
-#      - name: Install Tflint
- #       run: |
-  #        curl -s https://raw.githubusercontent.com/antonbabenko/pre-commit-terraform/master/scripts/install_tflint.sh | bash
-   #       echo "Tflint installed successfully"
+      - name: Install Tflint
+        run: |
+          curl -s https://raw.githubusercontent.com/antonbabenko/pre-commit-terraform/master/scripts/install_tflint.sh | bash
+          echo "Tflint installed successfully"
 
-#      - name: Run Tflint
-  #      working-directory: ./Terraform
- #       run: tflint --recursive
+      - name: Run Tflint
+        working-directory: ./Terraform
+        run: tflint --recursive
 
-#  Checkov:
- #   name: Checkov scan
-  #  runs-on: ubuntu-latest
-   # steps:
-    #  - name: Checkout code
-     #   uses: actions/checkout@v2
+  Checkov:
+    name: Checkov scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-#      - name: Install Checkov
- #       run: |
-  #        pip install checkov
-#          echo "Checkov installed successfully"
+      - name: Install Checkov
+        run: |
+          pip install checkov
+          echo "Checkov installed successfully"
 
- #     - name: Run Checkov
-  #      working-directory: ./Terraform
-   #     run: |
-    #      checkov -d . --quiet
-     #     echo "Checkov scan completed successfully"
+      - name: Run Checkov
+        working-directory: ./Terraform
+        run: |
+          checkov -d . --quiet
+          echo "Checkov scan completed successfully"
 
-  #TFsec: 
-   # name: Tfsec scan
-    #runs-on: ubuntu-latest
-    #steps:
-     # - name: Checkout code
-      #  uses: actions/checkout@v2
+  TFsec: 
+    name: Tfsec scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-#      - name: Install Tfsec
- #       run: |
-  #        curl -sSfL https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install.sh | sh
-   #       echo "Tfsec installed successfully"
-#
- #     - name: Run Tfsec
-  #      working-directory: ./Terraform
-   #     run: tfsec --severity HIGH --soft-fail=false
+      - name: Install Tfsec
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install.sh | sh
+          echo "Tfsec installed successfully"
+
+      - name: Run Tfsec
+        working-directory: ./Terraform
+        run: tfsec --severity HIGH --soft-fail=false
 
   TerraformPlan:
     name: Terraform Plan
