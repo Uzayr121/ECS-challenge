@@ -21,7 +21,14 @@ variable "security_group_alb_id" {
 variable ssl_policy {
     description = "SSL policy"
     type = string
-    default = "ELBSecurityPolicy-2016-08"
+    default = "ELBSecurityPolicy-TLS-1-2-2017-01"
+}
+
+variable "certificate_arn" {
+    description = "ARN of the certificate"
+    type = string
+    default = "arn:aws:acm:eu-west-1:050451387626:certificate/1ecef7ae-5ec5-4dc3-a5bc-c981fb811466"
+  
 }
 variable public_subnet_id_1 {
     description = "Public subnet 1 id"

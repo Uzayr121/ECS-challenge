@@ -4,6 +4,7 @@ resource "aws_lb" "test" {
   load_balancer_type = "application"
   security_groups    = [var.security_group_alb_id]
   subnets            = [var.public_subnet_id_1, var.public_subnet_id_2]
+  drop_invalid_header_fields = true
 }
 
 # target group 
@@ -35,8 +36,8 @@ resource "aws_lb_listener" "https-lb" {
   load_balancer_arn = aws_lb.test.arn
   port              = "443"
   protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = "arn:aws:acm:eu-west-1:050451387626:certificate/1ecef7ae-5ec5-4dc3-a5bc-c981fb811466"
+  ssl_policy        = var.ssl_policy
+  certificate_arn   = var.certificate_arn
 
 
   default_action {
