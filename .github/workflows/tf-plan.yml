@@ -27,10 +27,10 @@ jobs:
         with:
           terraform_version: 1.11.1
 
-      - name: Install Tflint
-        run: |
-          curl -s https://raw.githubusercontent.com/antonbabenko/pre-commit-terraform/master/scripts/install_tflint.sh | bash
-          echo "Tflint installed successfully"
+      - name: set up Tflint
+        uses: terraform-linters/setup-tflint@master
+        with: 
+          tflint_version: latest
 
       - name: Run Tflint
         working-directory: ./Terraform
