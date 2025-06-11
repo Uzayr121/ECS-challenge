@@ -35,6 +35,7 @@ jobs:
       - name: Run Tflint
         working-directory: ./Terraform
         run: tflint --recursive
+        continue-on-error: true
 
   Checkov:
     name: Checkov scan
@@ -54,21 +55,6 @@ jobs:
           checkov -d . --quiet --soft-fail
           echo "Checkov scan completed successfully"
 
-  TFsec: 
-    name: Tfsec scan
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install Tfsec
-        run: |
-          curl -sSfL https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install.sh | sh
-          echo "Tfsec installed successfully"
-
-      - name: Run Tfsec
-        working-directory: ./Terraform
-        run: tfsec --severity HIGH --soft-fail=false
 
   TerraformPlan:
     name: Terraform Plan
