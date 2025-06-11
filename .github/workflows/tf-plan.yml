@@ -51,7 +51,7 @@ jobs:
       - name: Run Checkov
         working-directory: ./Terraform
         run: |
-          checkov -d . --quiet --soft-fail=true
+          checkov -d . --quiet --soft-fail
           echo "Checkov scan completed successfully"
 
   TFsec: 
