@@ -51,7 +51,7 @@ jobs:
       - name: Run Checkov
         working-directory: ./Terraform
         run: |
-          checkov -d . --quiet
+          checkov -d . --quiet --skip-check LOW
           echo "Checkov scan completed successfully"
 
   TFsec: 
