@@ -94,9 +94,14 @@ serve -s build
 2. **TF plan** : This pipeline is used so that we can view the changes terraform is going to make to our infrastructure. We use ``tflint`` and ``checkov`` to scan our terraform code for any possible errors.
 3. **TF apply** : This pipeline only runs if the the TF plan is successful
 4. **TF destroy** : This pipeline is used to tear down the infrastructure when we are finished or don't need to host the app
-## Useful links 🔗
 
-- [Terraform AWS Registry](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
-- [Terraform AWS ECS](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_cluster)
-- [Terraform Docs](https://www.terraform.io/docs/index.html)
-- [ECS Docs](https://docs.aws.amazon.com/ecs/latest/userguide/what-is-ecs.html)
+
+## Live Demonstration
+
+![Demo](/images/Demo.gif)
+
+
+## HTTPS redirection
+
+![Https](/images/https.gif)
+
